@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ant-design-pro-master(5)", ".", "{806D64A8-75A9-496B-A8FD-1D8A3E965727}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_57869"
+		Debug.AspNetCompiler.PhysicalPath = "..\ant-design-pro-master\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57869\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_57869"
+		Release.AspNetCompiler.PhysicalPath = "..\ant-design-pro-master\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57869\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "57869"
+		SlnRelativePath = "..\ant-design-pro-master\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{806D64A8-75A9-496B-A8FD-1D8A3E965727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{806D64A8-75A9-496B-A8FD-1D8A3E965727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F67A2F8-EFCB-4F79-90AA-24DBE513C6B7}
+	EndGlobalSection
+EndGlobal
