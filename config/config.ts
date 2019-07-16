@@ -123,6 +123,18 @@ export default {
               component: './Welcome',
             },
             {
+              name: '系统管理',
+              icon: 'solution',
+              path: '/sys',
+              routes: [
+                {
+                  name: '权限管理',
+                  path: '/sys/permission',
+                  component: './sys/permission',
+                },
+              ],
+            },
+            {
               path: '/form',
               icon: 'form',
               name: 'form',

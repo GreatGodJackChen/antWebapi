@@ -80,7 +80,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
    * constructor
    */
   let auth = mygetAuthority();
-  if (!auth) {
+  if (!auth || auth =='undefined') {
     window.location.href = '/user/login';
   }
 

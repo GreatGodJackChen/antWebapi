@@ -8,7 +8,7 @@ import { mysetAuthority } from '../../../utils/authority';
 export interface StateType {
   status?: 'ok' | 'error';
   type?: string;
-  currentAuthority?: 'user' | 'guest' | 'admin';
+  data?: string;
 }
 
 export type Effect = (
@@ -38,12 +38,14 @@ const Model: ModelType = {
   effects: {
     *login({ payload }, { call, put }) {
       const response = yield call(fakeAccountLogin, payload);
+      alert(response.data);
       yield put({
         type: 'changeLoginStatus',
         payload: response,
       });
       // Login successfully
       if (response.status === 'ok') {
+        mysetAuthority('myauthority', response.data);
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params as { redirect: string };
@@ -70,7 +72,6 @@ const Model: ModelType = {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      mysetAuthority('myauthority',payload.currentAuthority);
       return {
         ...state,
         status: payload.status,
