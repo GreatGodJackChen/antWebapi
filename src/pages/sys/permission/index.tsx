@@ -153,7 +153,7 @@ class TableList extends Component<TableListProps, TableListState> {
     }
 
     dispatch({
-      type: 'listTableList/fetch',
+      type: 'listPermissionList/fetch',
       payload: params,
     });
   };
@@ -165,7 +165,7 @@ class TableList extends Component<TableListProps, TableListState> {
       formValues: {},
     });
     dispatch({
-      type: 'listTableList/fetch',
+      type: 'listPermissionList/fetch',
       payload: {},
     });
   };
@@ -185,7 +185,7 @@ class TableList extends Component<TableListProps, TableListState> {
     switch (e.key) {
       case 'remove':
         dispatch({
-          type: 'listTableList/remove',
+          type: 'listPermissionList/remove',
           payload: {
             key: selectedRows.map(row => row.Id),
           },
@@ -214,7 +214,6 @@ class TableList extends Component<TableListProps, TableListState> {
 
     form.validateFields((err, fieldsValue) => {
       if (err) return;
-
       const values = {
         ...fieldsValue,
         updatedAt: fieldsValue.updatedAt && fieldsValue.updatedAt.valueOf(),
@@ -225,7 +224,7 @@ class TableList extends Component<TableListProps, TableListState> {
       });
 
       dispatch({
-        type: 'listTableList/fetch',
+        type: 'listPermissionList/fetch',
         payload: values,
       });
     });
@@ -244,12 +243,14 @@ class TableList extends Component<TableListProps, TableListState> {
     });
   };
 
-  handleAdd = (fields: { desc: any }) => {
+  handleAdd = (fields: any) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'listTableList/add',
+      type: 'listPermissionList/add',
       payload: {
-        desc: fields.desc,
+        name: fields.name,
+        desc: fields.ActionCode,
+        key: fields.id,
       },
     });
 
@@ -257,10 +258,10 @@ class TableList extends Component<TableListProps, TableListState> {
     this.handleModalVisible();
   };
 
-  handleUpdate = (fields: FormValsType) => {
+  handleUpdate = (fields: {}) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'listTableList/update',
+      type: 'listPermissionList/update',
       payload: {
         name: fields.name,
         desc: fields.ActionCode,

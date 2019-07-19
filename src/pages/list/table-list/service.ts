@@ -18,6 +18,7 @@ export async function removeRule(params: TableListParams) {
 }
 
 export async function addRule(params: TableListParams) {
+  alert(params);
   return request('/api/rule', {
     method: 'POST',
     data: {
