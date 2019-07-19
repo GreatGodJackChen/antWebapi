@@ -46,8 +46,26 @@ const errorHandler = (error: { response: Response }): void => {
 const auth: string = mygetAuthority('myauthority');
 const request = extend({
   errorHandler, // 默认错误处理
- // credentials: 'include', // 默认请求是否带上cookie
-  headers: { useless: `prefix${auth}`},
+  // credentials: 'include', // 默认请求是否带上cookie
+  headers: {
+    useless: `prefix${auth}`,
+    //set: { 'content-Type', 'application/json; charset=utf-8'},
+    //set: { 'content-Type', 'application/json; charset=utf-8'},
+    //set('',''),
+    //set('content-Type','application/json; charset=utf-8');
+    //set('Accept', 'application/json; charset=utf-8');
+  },
 });
-
+request.interceptors.response.use(async (response) => {
+  const data = await response.clone().json();
+  if (data.Code) {
+    if (data.Code == '403') {
+      window.location.href = '/exception/403';
+    }
+    if (data.Code == '401') {
+      window.location.href = '/user/login';
+    }
+  }
+  return response;
+})
 export default request;

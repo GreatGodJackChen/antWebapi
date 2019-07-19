@@ -243,14 +243,15 @@ class TableList extends Component<TableListProps, TableListState> {
     });
   };
 
-  handleAdd = (fields: any) => {
+  handleAdd = (fields: { Name: string, ActionCode: string, MenuId: string }) => {
     const { dispatch } = this.props;
     dispatch({
       type: 'listPermissionList/add',
       payload: {
-        name: fields.name,
-        desc: fields.ActionCode,
-        key: fields.id,
+        fields
+        //Name: fields.Name,
+        //ActionCode: fields.ActionCode,
+        //MenuId: fields.MenuId,
       },
     });
 
@@ -258,7 +259,7 @@ class TableList extends Component<TableListProps, TableListState> {
     this.handleModalVisible();
   };
 
-  handleUpdate = (fields: {}) => {
+  handleUpdate = (fields: FormValsType) => {
     const { dispatch } = this.props;
     dispatch({
       type: 'listPermissionList/update',

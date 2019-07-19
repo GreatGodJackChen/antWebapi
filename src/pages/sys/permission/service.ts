@@ -2,9 +2,9 @@ import request from '@/utils/request';
 import { TableListParams } from './data.d';
 import { APIV1 } from '../../../utils/config';
 
-export async function queryRule(params: TableListParams) {
-  return request('/api/permission', {
-    params,
+export async function queryRule(params: TableListParams){
+  return request(`${APIV1}/Permission`, {
+    params
   });
 }
 
@@ -19,11 +19,10 @@ export async function removeRule(params: TableListParams) {
 }
 
 export async function addRule(params: TableListParams) {
-  return request('https://localhost:44349/api/Permission', {
+  return request(`${APIV1}/Permission`, {
     method: 'POST',
     data: {
       ...params,
-      method: 'post',
     },
   });
 }
