@@ -49,23 +49,21 @@ const request = extend({
   // credentials: 'include', // 默认请求是否带上cookie
   headers: {
     useless: `prefix${auth}`,
-    //set: { 'content-Type', 'application/json; charset=utf-8'},
-    //set: { 'content-Type', 'application/json; charset=utf-8'},
-    //set('',''),
-    //set('content-Type','application/json; charset=utf-8');
-    //set('Accept', 'application/json; charset=utf-8');
   },
+  requestType: 'json',
 });
-request.interceptors.response.use(async (response) => {
-  const data = await response.clone().json();
-  if (data.Code) {
-    if (data.Code == '403') {
-      window.location.href = '/exception/403';
-    }
-    if (data.Code == '401') {
-      window.location.href = '/user/login';
-    }
-  }
-  return response;
-})
+
+//request.interceptors.response.use((response, options) => {
+//  const data =  response.clone().json();
+//  if (data.Code) {
+//    if (data.Code == '403') {
+//      window.location.href = '/exception/403';
+//    }
+//    if (data.Code == '401') {
+//      window.location.href = '/user/login';
+//    }
+//  }
+//  return response;
+//});
+
 export default request;

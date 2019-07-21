@@ -5,7 +5,7 @@ import { addRule, queryRule, removeRule, updateRule } from './service';
 import { TableListDate } from './data.d';
 
 export interface StateType {
-  data: TableListDate;
+  dataInfo: TableListDate;
 }
 
 export type Effect = (
@@ -31,8 +31,8 @@ const Model: ModelType = {
   namespace: 'listPermissionList',
 
   state: {
-    data: {
-      list: [],
+    dataInfo: {
+      data: [],
       pagination: {},
     },
   },
@@ -75,7 +75,7 @@ const Model: ModelType = {
     save(state, action) {
       return {
         ...state,
-        data: action.payload,
+        dataInfo: action.payload,
       };
     },
   },

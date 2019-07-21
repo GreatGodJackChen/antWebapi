@@ -247,7 +247,7 @@ class TableList extends Component<TableListProps, TableListState> {
 
     const { dispatch, form } = this.props;
 
-    form.validateFields((err, fieldsValue) => {
+    form.validateFields(['name,status'],(err, fieldsValue) => {
       if (err) return;
 
       const values = {
@@ -453,7 +453,7 @@ class TableList extends Component<TableListProps, TableListState> {
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
             <div className={styles.tableListOperator}>
-              <Button icon="plus" type="primary"  hidden={!checkAction(this.state.path, 'add')} onClick={() => this.handleModalVisible(true)}>
+              <Button icon="plus" type="primary"  hidden={checkAction(this.state.path, 'add')} onClick={() => this.handleModalVisible(true)}>
                 新建
               </Button>
               {selectedRows.length > 0 && (

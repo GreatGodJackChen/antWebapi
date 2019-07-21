@@ -1,9 +1,9 @@
 export interface TableListItem {
-  Id: string,
-  Name: string,
-  ActionCode: string,
-  MenuId: string,
-  Status: number;
+  id: string,
+  name: string,
+  actionCode: string,
+  menuId: string,
+  status: number;
 }
 export interface TableListPagination {
   total: number;
@@ -12,7 +12,7 @@ export interface TableListPagination {
 }
 
 export interface TableListDate {
-  list: TableListItem[];
+  data: TableListItem[];
   pagination: Partial<TableListPagination>;
 }
 

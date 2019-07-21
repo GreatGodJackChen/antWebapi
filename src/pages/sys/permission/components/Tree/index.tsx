@@ -14,7 +14,7 @@ class TreeBind extends React.Component<TreeProps>{
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: props.value,
     }
   }
   handleChange = (val: string) => {
@@ -60,6 +60,7 @@ class TreeBind extends React.Component<TreeProps>{
         placeholder="请选择"
         onChange={this.handleChange}
         allowClear
+        defaultValue={this.state.value}
       >
         {this.renderTreeNodes(treeData)}
       </TreeSelect>

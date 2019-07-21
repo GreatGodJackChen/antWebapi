@@ -83,19 +83,19 @@ class TableList extends Component<TableListProps, TableListState> {
   columns: StandardTableColumnProps[] = [
     {
       title: '名称',
-      dataIndex: 'Name',
+      dataIndex: 'name',
     },
     {
       title: '操作码',
-      dataIndex: 'ActionCode',
+      dataIndex: 'actionCode',
     },
     {
       title: '关联菜单',
-      dataIndex: 'MenuId',
+      dataIndex: 'menuId',
     },
     {
       title: '状态',
-      dataIndex: 'Status',
+      dataIndex: 'status',
       filters: [
         {
           text: status[0],
@@ -116,7 +116,7 @@ class TableList extends Component<TableListProps, TableListState> {
         <Fragment>
           <a onClick={() => this.handleUpdateModalVisible(true, record)}>编辑</a>
           <Divider type="vertical" />
-          <a onClick={() => this.handleUpdateModalVisible(true, record)}>删除</a>
+          <a onClick={() => this.handleDelete(record.id)}>删除</a>
         </Fragment>
       ),
     },
@@ -176,7 +176,20 @@ class TableList extends Component<TableListProps, TableListState> {
       expandForm: !expandForm,
     });
   };
-
+  handleDelete = (key: string) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'listPermissionList/remove',
+      payload: {
+        Id: key,
+      },
+      callback: () => {
+        this.setState({
+          selectedRows: [],
+        });
+      },
+    });
+  }
   handleMenuClick = (e: { key: string }) => {
     const { dispatch } = this.props;
     const { selectedRows } = this.state;
@@ -187,7 +200,7 @@ class TableList extends Component<TableListProps, TableListState> {
         dispatch({
           type: 'listPermissionList/remove',
           payload: {
-            key: selectedRows.map(row => row.Id),
+            key: selectedRows.map(row => row.id),
           },
           callback: () => {
             this.setState({
@@ -212,7 +225,7 @@ class TableList extends Component<TableListProps, TableListState> {
 
     const { dispatch, form } = this.props;
 
-    form.validateFields((err, fieldsValue) => {
+    form.validateFields(['name','status'],(err, fieldsValue) => {
       if (err) return;
       const values = {
         ...fieldsValue,
@@ -243,18 +256,18 @@ class TableList extends Component<TableListProps, TableListState> {
     });
   };
 
-  handleAdd = (fields: { Name: string, ActionCode: string, MenuId: string }) => {
+  handleAdd = (fields: { newname: string, newactionCode: string, newmenuId: string }) => {
     const { dispatch } = this.props;
     dispatch({
       type: 'listPermissionList/add',
       payload: {
-        fields
-        //Name: fields.Name,
-        //ActionCode: fields.ActionCode,
-        //MenuId: fields.MenuId,
+        
+       // fields
+        Name: fields.newname,
+        ActionCode: fields.newactionCode,
+        MenuId: fields.newmenuId,
       },
     });
-
     message.success('添加成功');
     this.handleModalVisible();
   };
@@ -264,13 +277,14 @@ class TableList extends Component<TableListProps, TableListState> {
     dispatch({
       type: 'listPermissionList/update',
       payload: {
-        name: fields.name,
-        desc: fields.ActionCode,
-        key: fields.id,
+        Name: fields.name,
+        ActionCode: fields.actionCode,
+        Id: fields.id,
+        MenuId: fields.menuId,
       },
     });
 
-    message.success('配置成功');
+    message.success('编辑成功');
     this.handleUpdateModalVisible();
   };
 
@@ -281,16 +295,16 @@ class TableList extends Component<TableListProps, TableListState> {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="规则名称">
+            <FormItem label="名称">
               {getFieldDecorator('name')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="使用状态">
+            <FormItem label="状态">
               {getFieldDecorator('status')(
                 <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
+                  <Option value="1">关闭</Option>
+                  <Option value="0">运行中</Option>
                 </Select>,
               )}
             </FormItem>
@@ -392,7 +406,7 @@ class TableList extends Component<TableListProps, TableListState> {
   }
   render() {
     const {
-      listPermissionList: { data },
+      listPermissionList: { dataInfo },
       loading,
       form,
     } = this.props;
@@ -413,6 +427,7 @@ class TableList extends Component<TableListProps, TableListState> {
       handleUpdate: this.handleUpdate,
     };
     return (
+      
       <PageHeaderWrapper>
         <Card bordered={false}>
           <div className={styles.tableList}>
@@ -435,7 +450,7 @@ class TableList extends Component<TableListProps, TableListState> {
             <StandardTable
               selectedRows={selectedRows}
               loading={loading}
-              data={data}
+              dataInfo={dataInfo}
               columns={this.columns}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}

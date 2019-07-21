@@ -7,9 +7,9 @@ const FormItem = Form.Item;
 interface CreateFormProps extends FormComponentProps {
   modalVisible: boolean;
   handleAdd: (fieldsValue: {
-    Name: string,
-    ActionCode: string,
-    MenuId:string,
+    newname: string,
+    newactionCode: string,
+    newmenuId:string,
   }) => void;
   handleModalVisible: () => void;
 }
@@ -26,24 +26,24 @@ const CreateForm: React.SFC<CreateFormProps> = props => {
   return (
     <Modal
       destroyOnClose
-      title="新建规则"
+      title="新增"
       visible={modalVisible}
       onOk={okHandle}
       onCancel={() => handleModalVisible()}
     >
       <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="名称">
-        {form.getFieldDecorator('Name', {
+        {form.getFieldDecorator('newname', {
           rules: [{ required: true, message: '请输入至少2个字符的规则描述！', min: 2 }],
         })(<Input placeholder="请输入" />)}
       </FormItem>
       <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="操作码">
-        {form.getFieldDecorator('ActionCode', {
+        {form.getFieldDecorator('newactionCode', {
           rules: [{ required: true, message: '请输入至少2个字符的规则描述！', min: 2 }],
         })(<Input placeholder="请输入" />)}
       </FormItem>
       <FormItem  labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="关联菜单">
-        {form.getFieldDecorator('MenuId', {
-          rules: [{}],
+        {form.getFieldDecorator('newmenuId', {
+          rules: [{ required: true,}],
         })(<TreeBind />)}
       </FormItem>
     </Modal>

@@ -55,7 +55,7 @@ class StandardTable extends Component<StandardTableProps<TableListItem>, Standar
 
   constructor(props: StandardTableProps<TableListItem>) {
     super(props);
-    const { columns } = props;
+    const { columns, loading } = props;
     const needTotalList = initTotalList(columns);
 
     this.state = {

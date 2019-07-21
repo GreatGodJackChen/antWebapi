@@ -26,8 +26,8 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export interface StandardTableProps<T> extends Omit<TableProps<T>, 'columns'> {
   columns: StandardTableColumnProps[];
-  data: {
-    list: TableListItem[];
+  dataInfo: {
+    data: TableListItem[];
     pagination: StandardTableProps<TableListItem>['pagination'];
   };
   selectedRows: TableListItem[];
@@ -88,8 +88,8 @@ class StandardTable extends Component<StandardTableProps<TableListItem>, Standar
 
   render() {
     const { selectedRowKeys, needTotalList } = this.state;
-    const { data, rowKey, ...rest } = this.props;
-    const { list = [], pagination = false } = data || {};
+    const { dataInfo, rowKey, ...rest } = this.props;
+    const { data = [], pagination = false } = dataInfo || {};
 
     const paginationProps = {
       showSizeChanger: true,
@@ -101,7 +101,7 @@ class StandardTable extends Component<StandardTableProps<TableListItem>, Standar
       selectedRowKeys,
       onChange: this.handleRowSelectChange,
       getCheckboxProps: (record: TableListItem) => ({
-        disabled: record.disabled,
+        disabled: record.status == 0 ? false : true,
       }),
     };
 
@@ -133,9 +133,9 @@ class StandardTable extends Component<StandardTableProps<TableListItem>, Standar
           />
         </div>
         <Table
-          rowKey={rowKey || 'key'}
+          rowKey={rowKey || 'id'}
           rowSelection={rowSelection}
-          dataSource={list}
+          dataSource={data}
           pagination={paginationProps}
           onChange={this.handleTableChange}
           {...rest}
