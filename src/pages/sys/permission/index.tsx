@@ -176,12 +176,15 @@ class TableList extends Component<TableListProps, TableListState> {
       expandForm: !expandForm,
     });
   };
-  handleDelete = (key: string) => {
+  handleDelete = (e: string) => {
     const { dispatch } = this.props;
+    const { selectedRows } = this.state;
+    if (!e) return;
     dispatch({
       type: 'listPermissionList/remove',
-      payload: {
-        Id: key,
+      payload:
+      {
+        key: [e],
       },
       callback: () => {
         this.setState({
@@ -463,7 +466,6 @@ class TableList extends Component<TableListProps, TableListState> {
             {...updateMethods}
             updateModalVisible={updateModalVisible}
             values={stepFormValues}
-            form={form}
           />
         ) : null}
       </PageHeaderWrapper>

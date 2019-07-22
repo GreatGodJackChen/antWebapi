@@ -39,9 +39,11 @@ class UpdateForm extends Component<UpdateFormProps, UpdateFormState> {
   }
   okHandle = () => {
     const { form, handleUpdate } = this.props;
+    const { validateFields } = this.props.form;
     const { formVals: oldValue } = this.state;
-    form.validateFields(['name', 'actionCode','menuId'],(err, fieldsValue) => {
+    validateFields(['name', 'actionCode','menuId'],(err, fieldsValue) => {
       if (err) return;
+      form.resetFields();
       const formVals = { ...oldValue, ...fieldsValue };
       this.setState(
         {
@@ -57,6 +59,7 @@ class UpdateForm extends Component<UpdateFormProps, UpdateFormState> {
     const { updateModalVisible, handleUpdateModalVisible, form } = this.props;
     return (
       <Modal
+        key={this.state.formVals}
         destroyOnClose
         title="编辑"
         visible={updateModalVisible}
@@ -85,4 +88,4 @@ class UpdateForm extends Component<UpdateFormProps, UpdateFormState> {
     );
   }
 }
-export default UpdateForm
+export default Form.create<UpdateFormProps>()(UpdateForm);

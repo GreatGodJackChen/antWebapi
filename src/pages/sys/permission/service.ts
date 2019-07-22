@@ -10,8 +10,8 @@ export async function queryRule(params: TableListParams){
 }
 
 export async function removeRule(params: TableListParams) {
-  return request('APIV1/permission', {
-    method: 'POST',
+  return request(`${APIV1}/Permission/deletePermission`, {
+    method: 'Delete',
     data: {
       ...params,
       method: 'delete',
@@ -29,7 +29,7 @@ export async function addRule(params: TableListParams) {
 }
 
 export async function updateRule(params: TableListParams) {
-  return request(`${APIV1}/Permission/updateRule`, {
+  return request(`${APIV1}/Permission/updatePermission`, {
     method: 'POST',
     data: {
       ...params,
