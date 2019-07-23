@@ -91,7 +91,7 @@ class TableList extends Component<TableListProps, TableListState> {
     },
     {
       title: '关联菜单',
-      dataIndex: 'menuId',
+      dataIndex: 'menuName',
     },
     {
       title: '状态',
@@ -178,7 +178,6 @@ class TableList extends Component<TableListProps, TableListState> {
   };
   handleDelete = (e: string) => {
     const { dispatch } = this.props;
-    const { selectedRows } = this.state;
     if (!e) return;
     dispatch({
       type: 'listPermissionList/remove',

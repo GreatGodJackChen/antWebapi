@@ -4,6 +4,7 @@ export interface TableListItem {
   actionCode: string,
   menuId: string,
   status: number;
+  menuName: string;
 }
 export interface TableListPagination {
   total: number;

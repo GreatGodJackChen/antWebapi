@@ -38,7 +38,6 @@ const Model: ModelType = {
   effects: {
     *login({ payload }, { call, put }) {
       const response = yield call(fakeAccountLogin, payload);
-      alert(response.data);
       yield put({
         type: 'changeLoginStatus',
         payload: response,

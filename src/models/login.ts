@@ -1,6 +1,6 @@
 import { AnyAction, Reducer } from 'redux';
 import { parse, stringify } from 'qs';
-
+import { removeAuthority } from '../utils/authority';
 import { EffectsCommandMap } from 'dva';
 import { routerRedux } from 'dva/router';
 
@@ -35,6 +35,9 @@ const Model: ModelType = {
 
   effects: {
     *logout(_, { put }) {
+      //clear
+      removeAuthority('myauthority');
+      removeAuthority('menu');
       const { redirect } = getPageQuery();
       // redirect
       if (window.location.pathname !== '/user/login' && !redirect) {

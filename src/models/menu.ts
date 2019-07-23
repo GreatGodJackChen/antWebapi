@@ -12,7 +12,6 @@ const getBreadcrumbNameMap = (menuData: object) => {
   const routerMap = {};
 
   const flattenMenuData = data => {
-    alert(data);
     data.forEach(menuItem => {
       if (menuItem.children) {
         flattenMenuData(menuItem.children);
